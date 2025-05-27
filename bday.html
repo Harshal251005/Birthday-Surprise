@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday!</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: pink;
+      color: #333;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .container {
+      padding: 2rem;
+      opacity: 0;
+      transition: opacity 2s ease-in;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-top: 2rem;
+    }
+
+    .cake {
+      font-size: 10rem;
+    }
+
+    button {
+      padding: 1rem 2rem;
+      margin: 1rem;
+      font-size: 1rem;
+      background-color: #fff0f5;
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #ffb6c1;
+    }
+
+    .popup {
+      display: none;
+      padding: 1rem;
+      margin-top: 1rem;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 2;
+    }
+
+    .balloons {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      width: 40px;
+      height: 60px;
+      background: #ff69b4;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: float 8s infinite ease-in;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-110vh); }
+    }
+
+    #intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: pink;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      z-index: 10;
+      transition: opacity 2s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div id="intro">Loading Your Special Birthday Surprise... 🎉</div>
+
+  <div class="container" id="main">
+    <h1>🎉 Happy Birthday Dear Ketaki! 🎂</h1>
+    <div class="cake">🎂</div>
+    <audio id="bg-music" autoplay loop>
+      <source src="https://res.cloudinary.com/dx5utocxk/video/upload/v1716834572/romantic-song.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+    <button onclick="showMessage()">📩 Special Message</button>
+    <div class="popup" id="message">
+      <p>
+        ❤️ Ketaki, you are the one special female friend I got till now. ❤️<br>
+        Though we never met in person, our bond is pure and strong.<br>
+        I wish you lots of love, happiness, and care every single day, not just today. ❤️<br>
+        I even wrote a poem for you, tried it for the first time, it's unique like my feelings and thoughts for you.
+      </p>
+      <button onclick="showPoemAndFinal()">📜 Marathi Poem & Final Wish</button>
+    </div>
+    <div class="popup" id="poem">
+      <p>
+        मैत्री म्हणजे नातं शब्दांपलिकडचं,<br>
+        जिथं मनं आपोआप जुळतात.<br>
+        कधीच न भेटलो प्रत्यक्षात,<br>
+        तरी भावना शब्दांतून उमजतात.<br>
+        हसणं, रडणं, सगळं शेअर करताना,<br>
+        मनात एक विश्वास तयार होतो.<br>
+        मैत्री म्हणजे फक्त मेसेज नव्हे<br>,
+        ती मनाला मिळालेली शांत, निवांत साथ असते. ❤️! ❤️
+      </p>
+    </div>
+    <div class="popup" id="final">
+      <p><strong>❤️🎁 Final Wish 🎁❤️</strong></p>
+      <p>
+        Once again, wish you the happiest birthday Ketaki! 🎉<br>
+        May God fulfill all the wishes and dreams you carry in your heart. 💫<br>
+        I genuinely wish that our bond stays strong forever. ❤️<br>
+        And at last, I would just say — lots of love from my side. ❤️<br>
+        I love our friendship and I hope you feel the same too. ❤️🥰
+      </p>
+    </div>
+  </div>
+
+  <div class="balloons" id="balloons"></div>
+
+  <script>
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById("intro").style.opacity = 0;
+        setTimeout(() => {
+          document.getElementById("intro").style.display = "none";
+          document.getElementById("main").style.opacity = 1;
+          document.body.style.overflowY = 'auto';
+        }, 2000);
+      }, 2500);
+
+      const balloonContainer = document.getElementById("balloons");
+      const colors = ['#ff69b4', '#ff6347', '#ffa500', '#8a2be2', '#00ced1', '#ff1493'];
+      for (let i = 0; i < 30; i++) {
+        const b = document.createElement("div");
+        b.classList.add("balloon");
+        b.style.left = Math.random() * 100 + "%";
+        b.style.animationDuration = (5 + Math.random() * 5) + "s";
+        b.style.background = colors[Math.floor(Math.random() * colors.length)];
+        balloonContainer.appendChild(b);
+      }
+    };
+
+    function showMessage() {
+      document.getElementById("message").style.display = "block";
+    }
+
+    function showPoemAndFinal() {
+      document.getElementById("poem").style.display = "block";
+      document.getElementById("final").style.display = "block";
+    }
+  </script>
+</body>
+</html>
